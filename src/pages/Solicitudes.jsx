@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
-import { productos } from '../data/productos';
-import ListaProductos from '../components/ListaProductos';
+import { solicitudes } from '../data/solicitudes';
+import ListaSolicitudes from '../components/ListaSolicitudes';
 import FormularioContacto from '../components/FormularioContacto';
 
-const categorias = ['Todas', ...new Set(productos.map((p) => p.categoria))];
+const estados = ['Todas', ...new Set(solicitudes.map((s) => s.estado))];
 
-export default function Catalogo() {
+export default function Solicitudes() {
     const [lista, setLista] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [busqueda, setBusqueda] = useState('');
     const [textoFiltro, setTextoFiltro] = useState('');
     const [categoria, setCategoria] = useState('Todas');
 
-    // Arreglo vacío: simula la carga de productos una sola vez
+    // Arreglo vacío: simula la carga de solicitudes una sola vez
     useEffect(() => {
         const timer = setTimeout(() => {
-            setLista(productos);
+            setLista(solicitudes);
             setCargando(false);
         }, 1000);
         return () => clearTimeout(timer);
@@ -29,29 +29,29 @@ export default function Catalogo() {
 
     const filtrados = lista.filter(
         (p) =>
-            p.nombre.toLowerCase().includes(textoFiltro.toLowerCase()) &&
-            (categoria === 'Todas' || p.categoria === categoria)
+            p.titulo.toLowerCase().includes(textoFiltro.toLowerCase()) &&
+            (categoria === 'Todas' || p.estado === categoria)
     );
 
     return (
         <div>
-            <h2>Catálogo</h2>
+            <h2>Solicitudes</h2>
 
             <div className="filtros">
                 <input
                     type="text"
-                    placeholder="Buscar producto..."
+                    placeholder="Buscar solicitud..."
                     value={busqueda}
                     onChange={(e) => setBusqueda(e.target.value)}
                 />
                 <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-                    {categorias.map((c) => (
+                    {estados.map((c) => (
                         <option key={c} value={c}>{c}</option>
                     ))}
                 </select>
             </div>
 
-            {cargando ? <p>Cargando productos...</p> : <ListaProductos productos={filtrados} />}
+            {cargando ? <p>Cargando solicitudes...</p> : <ListaSolicitudes solicitudes={filtrados} />}
 
             <FormularioContacto />
         </div>
