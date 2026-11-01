@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { productos } from '../data/productos';
+import { solicitudes } from '../data/solicitudes';
 
 export default class Inicio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        saludo: 'Hola',
-        visitas: 0
+            saludo: 'Hola',
+            visitas: 0
         };
     }
 
@@ -26,21 +26,21 @@ export default class Inicio extends React.Component {
 
     render() {
         return (
-        <div>
-            <h2>{this.state.saludo}, bienvenido</h2>
-            <p>Visitas: {this.state.visitas}</p>
-            <button className="btn-visita" onClick={this.sumarVisita}>Sumar visita</button>
+            <div>
+                <h2>{this.state.saludo}, bienvenido</h2>
+                <p>Visitas: {this.state.visitas}</p>
+                <button className="btn-visita" onClick={this.sumarVisita}>Sumar visita</button>
 
-            <h3>Productos destacados</h3>
-            <ul className="productos-lista">
-            {productos.slice(0, 3).map((p) => (
-                <li key={p.id}>
-                {p.nombre} - S/ {p.precio}{' '}
-                <Link to={`/producto/${p.id}`}>Ver detalle</Link>
-                </li>
-            ))}
-            </ul>
-        </div>
+                <h3>Solicitudes recientes</h3>
+                <ul className="solicitudes-lista">
+                    {solicitudes.slice(0, 3).map((s) => (
+                        <li key={s.id}>
+                            {s.titulo} - {s.estado}{' '}
+                            <Link to={`/solicitud/${s.id}`}>Ver detalle</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         );
     }
 }
