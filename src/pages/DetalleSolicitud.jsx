@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { solicitudes } from '../data/solicitudes';
+import { SolicitudesContexto } from '../context/SolicitudesContexto';
 
 export default function DetalleSolicitud() {
     const { id } = useParams();
+    const { solicitudes } = useContext(SolicitudesContexto);
     const solicitud = solicitudes.find((s) => s.id === Number(id));
 
     if (!solicitud) {
