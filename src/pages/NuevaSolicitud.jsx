@@ -1,12 +1,14 @@
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { SolicitudesContexto } from '../context/SolicitudesContexto';
 
 const formularioInicial = {
     titulo: '',
     descripcion: '',
 };
 
-export default function NuevaSolicitud({ onAgregarSolicitud }) {
+export default function NuevaSolicitud() {
+    const { agregarSolicitud } = useContext(SolicitudesContexto);
     const [formulario, setFormulario] = useState(formularioInicial);
     const [enviado, setEnviado] = useState(false);
 
@@ -24,7 +26,7 @@ export default function NuevaSolicitud({ onAgregarSolicitud }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        onAgregarSolicitud(formulario);
+        agregarSolicitud(formulario);
 
         setFormulario(formularioInicial);
         setEnviado(true);

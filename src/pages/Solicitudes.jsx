@@ -1,9 +1,13 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ListaSolicitudes from '../components/ListaSolicitudes';
 import FormularioContacto from '../components/FormularioContacto';
+import { SolicitudesContexto } from '../context/SolicitudesContexto';
 
-export default function Solicitudes({ solicitudes }) {
+export default function Solicitudes() {
+    const { solicitudes } = useContext(SolicitudesContexto);
+    
+
     const [cargando, setCargando] = useState(true);
     const [busqueda, setBusqueda] = useState('');
     const [textoFiltro, setTextoFiltro] = useState('');

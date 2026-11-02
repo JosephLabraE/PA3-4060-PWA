@@ -32,6 +32,7 @@ body {
 
 .nav-links {
     display: flex;
+    align-items: center;
     gap: 15px;
 }
 
@@ -66,6 +67,11 @@ body {
 
 .btn-visita:hover {
     background-color: #004999;
+}
+
+.nav-links .btn-visita {
+    min-width: 120px;
+    white-space: nowrap;
 }
 
 .filtros {
@@ -114,4 +120,43 @@ body {
     gap: 8px;
     margin-top: 25px;
     max-width: 400px;
+}
+
+body.oscuro {
+    background-color: #1e1e2e;
+    color: #eee;
+}
+
+body.oscuro .app-container {
+    background-color: #2a2a3c;
+}
+
+body.oscuro .header-nav {
+    border-bottom-color: #555;
+}
+
+body.oscuro .header-nav h1 {
+    color: #eee;
+}
+
+body.oscuro .tarjeta {
+    background-color: #1e1e2e;
+    border-color: #555;
+}
+
+body.oscuro .tarjeta-fecha {
+    color: #aaa;
+}
+
+body.oscuro a {
+    color: #7db7ff;
+}
+
+body.oscuro .filtros input,
+body.oscuro .filtros select,
+body.oscuro .formulario input,
+body.oscuro .formulario textarea {
+    background-color: #1e1e2e;
+    color: #eee;
+    border-color: #555;
 }
