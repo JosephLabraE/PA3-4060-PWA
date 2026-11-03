@@ -2,7 +2,7 @@
 
 ## 1. Datos generales del proyecto
 
-**Nombre del proyecto:** Plataforma de Gestión de Solicitudes Académicas  
+**Nombre del proyecto:** Plataforma de Gestión de Solicitudes Académicas - PA3
 **Curso:** Programación Web II  
 **Tecnologías:** React, JavaScript, Redux, Context API, React Router y Vite.  
 **Tipo de aplicación:** Aplicación web de gestión de solicitudes académicas.
@@ -11,9 +11,11 @@
 
 | Integrante | Rol | Responsabilidad | Participación |
 |---|---|---|---|
-| Integrante 1: [Nombre completo] | Desarrollador de navegación y estado global con Redux | Implementación de rutas, navegación, Redux, acciones y seguimiento de solicitudes. | Parte 1 |
-| Integrante 2: [Nombre completo] | Desarrollador de componentes y Hooks | Componentes funcionales, buscador, filtros, efectos, formulario controlado y documentación README. | Parte 2 |
-| Integrante 3: [Nombre completo] | Desarrollador de gestión de estado con Context API | Contexto de solicitudes, Provider, contexto de tema claro/oscuro y comparación técnica entre Context API y Redux. | Parte 3 |
+| Integrante 1: Angel Jesús Vargas Manrique | Desarrollador de navegación y estado global con Redux | Implementación de rutas, navegación, Redux, acciones y seguimiento de solicitudes. | Parte 1 |
+| Integrante 2: Roy Giovanni Quiroz Morales | Desarrollador de componentes y Hooks | Componentes funcionales, buscador, filtros, efectos, formulario controlado y documentación README. | Parte 2 |
+| Integrante 3: Joseph Mathios Labra Espinal | Desarrollador de gestión de estado con Context API | Contexto de solicitudes, Provider, contexto de tema claro/oscuro y comparación técnica entre Context API y Redux. | Parte 3 |
+
+> **Nota sobre el equipo:** Aunque las pautas indicaban un grupo de 4 a 5 integrantes, un compañero nos avisó que no podría participar por inconvenientes personales. Nos organizamos entre los 3 para cubrir todas las partes y completar la aplicación al 100%.
 
 ## 3. Descripción del proyecto
 
@@ -72,23 +74,21 @@ Se desarrollaron componentes funcionales reutilizables para organizar la informa
 
 Se desarrolló un formulario para registrar nuevas solicitudes utilizando `useState`, controlando los campos de título y descripción.
 
-Además, se integró el formulario con el estado compartido de `App.jsx`, permitiendo agregar nuevas solicitudes a la lista sin recargar la aplicación.
+En la versión final, el formulario obtiene la función `agregarSolicitud` desde Context API, y las nuevas solicitudes se agregan al estado global.
 
 Las nuevas solicitudes reciben automáticamente un identificador, una fecha de registro y el estado inicial «Pendiente».
 
 ### Parte 3. Context API y comparación
 
-Esta parte contempla la implementación de Context API para compartir información entre diferentes componentes sin necesidad de transmitir propiedades manualmente en todos los niveles.
+Se implementó Context API para compartir información entre componentes sin pasar props manualmente.
 
-Las funcionalidades consideradas son:
-
-- Creación de un contexto de solicitudes mediante `createContext`.
-- Implementación de un Provider para administrar la lista de solicitudes.
-- Creación de funciones para agregar y actualizar solicitudes.
-- Utilización de `useContext` en las vistas de listado, detalle y formulario.
-- Creación de un contexto independiente para administrar el tema visual.
-- Implementación de un Provider para los temas claro y oscuro.
-- Incorporación de un botón para cambiar entre ambos temas.
+- `SolicitudesContexto` y `SolicitudesProvider`: guardan la lista de solicitudes y la función `agregarSolicitud`.
+- `TemaContexto` y `TemaProvider`: guardan el tema (claro u oscuro) y la función `alternarTema`.
+- `useContext` en `Solicitudes`, `DetalleSolicitud`, `NuevaSolicitud` y `App`.
+- Los Providers se agregan en `main.jsx`, dentro de `BrowserRouter`.
+- Un botón en la barra de navegación cambia el tema de toda la aplicación.
+- `App.jsx` dejó de manejar el estado de las solicitudes.
+- Se corrigió el detalle: ahora también muestra las solicitudes nuevas, porque lee la lista del contexto.
 
 **Justificación del estado global**
 
@@ -125,7 +125,7 @@ El sistema permite:
 6. Registrar nuevas solicitudes.
 7. Incorporar automáticamente los nuevos registros al listado.
 8. Agregar o quitar solicitudes del seguimiento mediante Redux.
-9. Gestionar información compartida y preferencias visuales mediante Context API, según la implementación de la tercera parte.
+9. Compartir las solicitudes y cambiar el tema visual mediante Context API.
 
 ## 7. Estructura general del proyecto
 
@@ -138,6 +138,12 @@ PA3-4060-PWA/
 │   │   ├── ListaSolicitudes.jsx
 │   │   ├── TarjetaSolicitud.jsx
 │   │   └── FormularioContacto.jsx
+│   │
+│   ├── context/
+│   │   ├── SolicitudesContexto.js
+│   │   ├── SolicitudesProvider.jsx
+│   │   ├── TemaContexto.js
+│   │   └── TemaProvider.jsx
 │   │
 │   ├── data/
 │   │   └── solicitudes.js
@@ -222,16 +228,16 @@ En esta sección se incorporarán capturas de pantalla que demuestren el funcion
 
 | N.º | Evidencia | Descripción |
 |---|---|---|
-| 1 | [Insertar captura] | Página principal y barra de navegación. |
-| 2 | [Insertar captura] | Listado de solicitudes académicas. |
-| 3 | [Insertar captura] | Buscador y filtro por estado. |
-| 4 | [Insertar captura] | Mensaje de carga inicial. |
-| 5 | [Insertar captura] | Detalle de una solicitud. |
-| 6 | [Insertar captura] | Registro de una nueva solicitud. |
-| 7 | [Insertar captura] | Nueva solicitud visualizada en el listado. |
-| 8 | [Insertar captura] | Funcionalidad de seguimiento con Redux. |
-| 9 | [Insertar captura] | Implementación de Context API. |
-| 10 | [Insertar captura] | Cambio entre tema claro y oscuro. |
+| 1 | ![Página principal](evidencias/PAGINA-PRINCIPAL.png) | Página principal y barra de navegación. |
+| 2 | ![Listado de solicitudes](evidencias/LISTADO-SOLICITUDES.png) | Listado de solicitudes académicas. |
+| 3 | ![Buscador y filtro](evidencias/BUSCADOR-FILTRO.png) | Buscador y filtro por estado. |
+| 4 | ![Mensaje de carga](evidencias/MENSAJE-CARGA.png) | Mensaje de carga inicial. |
+| 5 | ![Detalle de solicitud](evidencias/DETALLE-SOLICITUD.png) | Detalle de una solicitud. |
+| 6 | ![Nueva solicitud](evidencias/REGISTRO-SOLICITUD.png) | Registro de una nueva solicitud. |
+| 7 | ![Registro de solicitud](evidencias/NUEVA-SOLICITUD.png) | Nueva solicitud visualizada en el listado. |
+| 8 | ![Funcionalidad de seguimiento](evidencias/FUNCIONALIDAD-SEGUIMIENTO.png) | Funcionalidad de seguimiento con Redux. |
+| 9 | ![Context API](evidencias/CONTEXT-API.png) | Implementación de Context API. |
+| 10 | ![Cambio de tema](evidencias/CAMBIO-TEMA.png) | Cambio entre tema claro y oscuro. |
 
 ## 11. Conclusiones
 
@@ -242,11 +248,13 @@ En esta sección se incorporarán capturas de pantalla que demuestren el funcion
 - Se desarrolló un formulario controlado que permite registrar nuevas solicitudes y visualizar los resultados en el listado.
 - La integración de Context API permite comprender otras alternativas para compartir información entre componentes.
 - La comparación entre Redux y Context API permitió identificar sus diferencias, ventajas y posibles escenarios de utilización.
+- Context API permitió eliminar el paso de props de la lista de solicitudes y aplicar un tema visual en toda la aplicación
 
 En conclusión, el proyecto permitió integrar diferentes herramientas del ecosistema React para construir una aplicación web organizada, interactiva y escalable.
 
 ## 12. Video de presentación
 
-**Video público de YouTube:** [PEGAR AQUÍ EL ENLACE]
+**Video público de YouTube:** https://youtu.be/uBlrve-qCsQ
 
 El video presenta la solución desarrollada, explica las funcionalidades principales, muestra la implementación técnica y cuenta con la participación de los tres integrantes del equipo.
+ 
